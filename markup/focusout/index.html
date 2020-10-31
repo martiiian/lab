@@ -1,0 +1,53 @@
+<!--WCAG buttons-->
+<div style="position: relative">
+  <button>open list</button>
+  <ul>
+    <li><button>list button</button></li>
+    <li><button>list button</button></li>
+    <li><button>list button</button></li>
+    <li><button>list button</button></li>
+  </ul>
+</div>
+
+<script>
+  const button = document.getElementsByTagName('button')[0]
+  const li = document.getElementsByTagName('li')
+  const ul = document.getElementsByTagName('ul')[0]
+  let firstFocused = false
+
+  const switchUlVisibility = (val) => {
+    ul.style.display = val ? 'block' : 'none'
+  }
+
+  button.addEventListener('focusin', () => {
+    switchUlVisibility(true)
+    if (firstFocused) {
+      switchUlVisibility(false)
+      firstFocused = false
+    }
+  })
+  const liArr = Array.from(li)
+  liArr[liArr.length - 1].addEventListener('focusout', () => {
+    switchUlVisibility(false)
+  })
+  liArr[0].addEventListener('focusin', () => {
+    firstFocused = true
+  })
+</script>
+
+<style>
+div {
+  padding-top: 200px;
+}
+ul {
+  display: none;
+  position: absolute;
+  bottom: 15px;
+}
+ul:focus {
+  background: black;
+}
+li:focus {
+  background: red;
+}
+</style>
