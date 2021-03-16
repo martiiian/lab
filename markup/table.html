@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<table border="2">
+  <thead>
+  <tr>
+    <th rowspan="3">
+      Индекс
+    </th>
+
+    <th rowspan="3">
+      наименование
+    </th>
+
+    <th rowspan="2" colspan="4">
+      форма конторля
+    </th>
+
+    <th rowspan="2" colspan="2">зет</th>
+
+    <th rowspan="2" colspan="5">академические часы</th>
+
+    <th colspan="8">1 курс</th>
+  </tr>
+
+  <tr>
+    <th colspan="8">1 семестр</th>
+  </tr>
+
+  <tr>
+    <th>Экзамен</th>
+
+    <th>Зачет</th>
+
+    <th>Зачет с ОЦ</th>
+
+    <th>кр</th>
+
+    <th>эксперт</th>
+
+    <th>факт</th>
+
+    <th>эксперт</th>
+
+    <th>план</th>
+
+    <th>конт. часы</th>
+
+    <th>ср.</th>
+
+    <th>контроль</th>
+
+    <th>зет</th>
+
+    <th>итого</th>
+
+    <th>лек</th>
+
+    <th>лаб</th>
+
+    <th>пр</th>
+
+    <th>конс</th>
+
+    <th>ср</th>
+
+    <th>контроль</th>
+  </tr>
+
+  </thead>
+
+  <tbody>
+  <tr>
+    <td>one</td>
+    <td>nigga</td>
+    <td>ops</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
+    <td>11</td>
+    <td>12</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
+
+<script>
+  function renderTable(data) {
+    const $table = document.createElement('table')
+    let $thead = document.createElement('thead')
+    const $tbody = document.createElement('tbody')
+
+    $thead = data.reduce((thead, trData) => {
+      let $tr = document.createElement('tr')
+      $tr = trData.reduce(($tr, thData) => {
+        const $th = document.createElement('th')
+
+        if (thData.col) $th.setAttribute('colspan', thData.col)
+        if (thData.row) $th.setAttribute('rowspan', thData.row)
+        $th.innerText = thData.name
+
+        $tr.appendChild($th)
+        return $tr
+      }, $tr)
+
+      $thead.appendChild($tr)
+      return $thead
+    }, $thead)
+
+    $table.appendChild($thead).appendChild($tbody)
+    $table.setAttribute('border', 2)
+    return $table
+  }
+
+  const columns = [
+    {
+      name: 'index',
+      type: 'Text',
+      row: 3,
+    },
+    {
+      row: 3,
+      name: 'name',
+      type: 'Text',
+    },
+    {
+      row: 2,
+      col: 4,
+      name: 'control-form',
+      type: 'Text',
+      children: [
+        { name: 'exams', type: 'Text' },
+        { name: 'zachet' },
+        { name: 'zachet-v-oc' },
+        { name: 'cr' },
+      ],
+    },
+    {
+      row: 2,
+      col: 2,
+      name: 'zet',
+      type: 'Text',
+      children: [{ name: 'expert' }, { name: 'fact' }],
+    },
+    {
+      row: 2,
+      col: 5,
+      name: 'academ-hour',
+      type: 'Text',
+      children: [
+        { name: 'expert' },
+        { name: 'plan' },
+        { name: 'kontr-hourse' },
+        { name: 'sr' },
+        { name: 'control' },
+      ],
+    },
+    {
+      col: 8,
+      name: 'first-course',
+      type: 'Text',
+      children: [
+        {
+          col: 8,
+          name: 'first-semestr',
+          children: [
+            { name: 'zet' },
+            { name: 'sum' },
+            { name: 'lek' },
+            { name: 'lab' },
+            { name: 'pr' },
+            { name: 'konst' },
+            { name: 'cp' },
+            { name: 'control' },
+          ],
+        },
+      ],
+    },
+  ]
+
+  function parseColumns(srcColumns, parentColumn = {}, level = 0, columns = []) {
+    for (const srcColumn of srcColumns) {
+      const curLevel = ((parentColumn.row || 1) - 1 + level)
+
+      if (!columns[curLevel]) {
+        columns[curLevel] = []
+      }
+      columns[curLevel].push({ ...srcColumn })
+
+      if (srcColumn.children && srcColumn.children.length) {
+        parseColumns(
+          srcColumn.children,
+          srcColumn,
+          level + 1,
+          columns,
+        )
+      }
+    }
+
+    return columns
+  }
+
+  // eslint-disable-next-line no-console
+  // console.log(parseColumns(columns))
+  document.body.append(renderTable(parseColumns(columns)))
+</script>
