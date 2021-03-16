@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .modal-shadow {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      background: rgba(0,0,0,0.2);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .active {
+      display: flex;
+    }
+    .modal {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<button class="open-modal-btn">open modal</button>
+<input type="text">
+
+<div class="modal-shadow">
+  <div class="modal">
+    <button class="close-modal-btn">close</button>
+    <input type="text">
+    <input type="text">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci amet aperiam consequuntur dolores enim eos exercitationem harum hic modi odio officiis pariatur porro quam, quibusdam, similique soluta velit vero, voluptatem?
+    </p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script>
+  const $openModalBtn = $('.open-modal-btn')
+  const $closeModalBtn = $('.close-modal-btn')
+  const $modalShadow = $('.modal-shadow')
+
+  $closeModalBtn.click(() => {
+    $modalShadow.removeClass('active')
+  })
+
+  $openModalBtn.click(() => {
+    setTimeout(() => {
+      $modalShadow.addClass('active')
+      $closeModalBtn.focus()
+    }, 0)
+  })
+</script>
+</body>
+</html>
