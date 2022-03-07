@@ -1,55 +1,61 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-class Wall {
-  constructor(ctx, canvas) {
-    this.ctx = ctx
-    this.canvas = canvas
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+const numberOfParticles = 200
+const particlesArray = []
+const imageUrl = new URL('cat.png', import.meta.url)
+const cat = new Image()
+cat.src = imageUrl
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width
+    this.y = Math.random() * canvas.height
+    this.angle = Math.random() * 360
+    this.size = Math.random() * 100 + 50
+    this.speed = Math.random() * 4 + 1
+    this.angle = Math.random() * 360
+    this.spin = Math.random() < 0.5 ? -1 : 1
   }
 
-  #renderBlock(options) {
-    this.ctx.fillStyle = options.fill;
-    this.ctx.fillRect(options.left, options.top, options.width, options.height);
+  draw() {
+    ctx.save()
+    ctx.translate(this.x, this.y)
+    ctx.rotate(this.angle * Math.PI / 360 * this.spin)
+    // ctx.fillStyle = 'red'
+    // ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(cat, 0 - this.size / 2, 0 - this.size / 2, this.size, this.size)
+    ctx.restore()
   }
 
-  renderBlocks() {
-    const blockOptions = {
-      width: 70, height: 20, space: 5, fill: 'red'
+  update() {
+    this.angle += 10
+    if (this.y > canvas.height) {
+      this.y = 0 - this.size
+      this.x = Math.random() * canvas.width
+      this.size = Math.random() * 100 + 50
+      this.speed = Math.random() * 4 + 1
     }
-
-    const columns = Math.ceil(this.canvas.offsetWidth / (blockOptions.width + blockOptions.space)) + 1;
-    const rows = Math.ceil(this.canvas.offsetHeight / (blockOptions.height + blockOptions.space));
-
-    for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
-      for (let colIndex = 0; colIndex < columns; colIndex++) {
-        const offset = rowIndex % 2
-          ? (blockOptions.width + blockOptions.space) / 2
-          : 0
-
-        this.#renderBlock({
-          ...blockOptions,
-          left: colIndex * (blockOptions.width + blockOptions.space) - offset,
-          top: rowIndex * (blockOptions.height + blockOptions.space),
-        });
-      }
-    }
-  }
-
-  fillBackground(color) {
-    const width = canvas.offsetWidth;
-    const height = canvas.offsetHeight;
-
-    this.ctx.fillStyle = color
-    this.ctx.fillRect(0, 0, width, height)
+    this.y += this.speed
   }
 }
 
-const wall = new Wall(ctx, canvas)
+function init() {
+  for (let i = 0; i < numberOfParticles; i++) {
+    particlesArray.push(new Particle())
+  }
+}
 
-wall.fillBackground('black')
-wall.renderBlocks()
-ctx.rotate(20 * Math.PI / 180);
-ctx.fillStyle = 'yellow'
-ctx.fillRect(100, 100, 50, 50)
-ctx.rotate(-(20 * Math.PI / 180));
-ctx.fillRect(150, 100, 50, 50)
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  for (const particle of particlesArray) {
+    particle.update()
+    particle.draw()
+  }
+  requestAnimationFrame(animate)
+}
+
+init()
+animate()
