@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      background: lightgray;
+    }
+    .container {
+      height: 400px;
+      width: 600px;
+      overflow-y: auto;
+    }
+    .child-item {
+      height: 100px;
+      background: red;
+      margin-top: 10px;
+    }
+    .child-item_active {
+      background: blue;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container"></div>
+
+<label>
+  Какой элемент выбрать? <br>
+  <input type="text" id="select-input" />
+</label>
+
+<script src="index.ts" type="module"></script>
+</body>
+</html>
