@@ -1,0 +1,134 @@
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+body {
+  margin: 0;
+  padding: 0;
+}
+    .box {
+      background: red;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .box__circle {
+      user-select: none;
+      background: yellow;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 10px yellow;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      touch-action: none;
+    }
+    .box__bar {
+      position: absolute;
+      bottom: 100px;
+      left: 20px;
+      width: 80%;
+      height: 50px;
+      background: blue;
+      border-radius: 10px;
+    }
+    .box__store {
+      width: 80px;
+      height: 80px;
+      background: gray;
+      border-radius: 50%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      right: 40px;
+      top: -15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box" class="box">
+    <div class="box__bar">
+      <div class="box__store">0</div>
+    </div>
+    <div id="log" style="position: absolute; bottom: 0;"></div>
+  </div>
+
+
+<script>
+const box = document.getElementById('box')
+let fingerCounter = 0
+
+function circleDown(e) {
+  if (e.isPrimary) {
+    fingerCounter = 1
+  } else {
+    fingerCounter++
+  }
+
+  const el = e.target
+  //if (Number(el.innerText) !== fingerCounter) return
+  const elSize = el.offsetWidth;
+  const elOffsetX = e.clientX - el.offsetLeft;
+  const elOffsetY = e.clientY - el.offsetTop;
+
+  el.setPointerCapture(e.pointerId)
+
+  const pointermove = (e) => {
+    el.style.left = `${e.clientX - elOffsetX}px`
+    el.style.top = `${e.clientY - elOffsetY}px`
+  }
+
+  const pointerup = (e) => {
+    fingerCounter = 0
+    el.removeEventListener('pointerup', pointerup);
+    el.removeEventListener('pointermove', pointermove);
+  }
+
+  el.addEventListener('pointermove', pointermove)
+
+  el.addEventListener('pointerup', pointerup)
+}
+
+function renderCircle(index) {
+  const el = document.createElement('div');
+  const size = 90;
+  const margin = 10;
+
+  el.classList.add('box__circle');
+  el.style.width = `${size}px`;
+  el.style.height = `${size}px`;
+  el.style.left = `${margin + index * size + margin * index}px`;
+  el.style.top = `${margin}px`;
+  el.addEventListener('pointerdown', circleDown);
+  el.innerText = index + 1;
+  return el
+}
+
+function buildCircles(countCircles, maxWidth) {
+  const circles = []
+  for (let i = 0; i < countCircles; i++) {
+    circles.push(renderCircle(i))
+  }
+  return circles
+}
+
+function appendCircles(circles, box) {
+  box.append(...circles)
+}
+
+const countCircles = 3;
+appendCircles(buildCircles(countCircles), box)
+//const circle = document.getElementById('circle')
+
+/*
+  box.addEventListener('pointerdown', (e) => {
+    circle.style.top = e.offsetY - circle.offsetHeight / 2 + 'px';
+    circle.style.left = e.offsetX - circle.offsetWidth / 2 + 'px';
+  })
+  */
+  </script>
+</body>
+
