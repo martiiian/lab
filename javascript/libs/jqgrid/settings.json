@@ -1,0 +1,162 @@
+{
+  "settings": {
+    "fields": [
+      {
+        "name": "task_responsible_nob",
+        "type": "string"
+      },
+      {
+        "name": "task_responsible_edition",
+        "type": "string"
+      },
+      {
+        "name": "task_responsible_name",
+        "type": "string"
+      },
+      {
+        "name": "task_status",
+        "type": "string"
+      },
+      {
+        "name": "quantity_total",
+        "type": "string"
+      },
+      {
+        "name": "quantity_article",
+        "type": "string"
+      },
+      {
+        "name": "quantity_microconcept",
+        "type": "string"
+      },
+      {
+        "name": "quantity_story",
+        "type": "string"
+      },
+      {
+        "name": "quantity_chronotype",
+        "type": "string"
+      },
+      {
+        "name": "volume_total",
+        "type": "string"
+      },
+      {
+        "name": "volume_article",
+        "type": "string"
+      },
+      {
+        "name": "volume_microconcept",
+        "type": "string"
+      },
+      {
+        "name": "volume_story",
+        "type": "string"
+      },
+      {
+        "name": "volume_chronotype",
+        "type": "string"
+      }
+    ],
+    "rows": [
+      {
+        "text": "НОБ ответственного за задачу",
+        "width": 250,
+        "dataField": "task_responsible_nob"
+      },
+      {
+        "text": "Редакция ответственного за задачу",
+        "width": 250,
+        "dataField": "task_responsible_edition"
+      },
+      {
+        "text": "Ответственный за задачу",
+        "width": 250,
+        "dataField": "task_responsible_name"
+      },
+      {
+        "text": "Статус",
+        "width": 250,
+        "dataField": "task_status"
+      }
+    ],
+    "values": [
+      {
+        "text": "Всего",
+        "width": 100,
+        "dataField": "quantity_total",
+        "function": "sum"
+      },
+      {
+        "text": "Статья",
+        "width": 100,
+        "dataField": "quantity_article",
+        "function": "sum"
+      },
+      {
+        "text": "Микропонятие",
+        "width": 100,
+        "dataField": "quantity_microconcept",
+        "function": "sum"
+      },
+      {
+        "text": "Сюжет",
+        "width": 100,
+        "dataField": "quantity_story",
+        "function": "sum"
+      },
+      {
+        "text": "Хронотоп",
+        "width": 100,
+        "dataField": "quantity_chronotype",
+        "function": "sum"
+      },
+      {
+        "text": "Всего",
+        "width": 100,
+        "dataField": "volume_total",
+        "function": "sum"
+      },
+      {
+        "text": "Статья",
+        "width": 100,
+        "dataField": "volume_article",
+        "function": "sum"
+      },
+      {
+        "text": "Микропонятие",
+        "width": 100,
+        "dataField": "volume_microconcept",
+        "function": "sum"
+      },
+      {
+        "text": "Сюжет",
+        "width": 100,
+        "dataField": "volume_story",
+        "function": "sum"
+      },
+      {
+        "text": "Хронотоп",
+        "width": 100,
+        "dataField": "volume_chronotype",
+        "function": "sum"
+      }
+    ],
+    "columns": [],
+    "columngroups": [],
+    "totals": {
+      "rows": {
+        "subtotals": true,
+        "grandtotals": true
+      },
+      "columns": {
+        "subtotals": true,
+        "grandtotals": true
+      }
+    },
+    "localization": {
+      "subtotalstring": "Всего",
+      "grandtotalstring": "Всего"
+    }
+  }
+}

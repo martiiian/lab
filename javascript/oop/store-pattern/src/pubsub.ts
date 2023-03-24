@@ -1,16 +1,16 @@
 export default class Pubsub {
-  constructor() {
-    this.events = {}
-  }
+  events: {
+    [key: string]: ((data: any) => void)[]
+  } = {}
 
-  subscribe(event, callback) {
+  subscribe(event: string, callback: () => any) {
     if (!this.events.hasOwnProperty(event)) {
       this.events[event] = []
     }
     this.events[event].push(callback)
   }
 
-  publish(event, data = {}) {
+  publish(event: string, data = {}) {
     if (!this.events.hasOwnProperty(event)) {
       return []
     }

@@ -1,0 +1,78 @@
+<div id="root"></div>
+<button id="create">+</button>
+<div>
+  Result:
+  <span id="result"></span>
+</div>
+
+<script>
+  function createInput(cb, name) {
+      const label = document.createElement('label')
+      const element = document.createElement('input')
+      element.addEventListener('input', cb)
+      label.append(name)
+      label.append(element)
+      return label
+    }
+
+  function createInputHeight(cb) {
+      return createInput(cb, 'height')
+    }
+
+  function createInputWeight(cb) {
+      return createInput(cb, 'weight')
+    }
+
+  function calculate({ height, weight }) {
+      return (height + weight) * 100
+    }
+
+  function createForm(updateData, parent) {
+      const data = {
+          height: 0,
+          weight: 0
+        }
+
+      const root = document.createElement('div')
+
+      const heightInput = createInputHeight((e) => {
+          data.height = +e.currentTarget.value
+          updateData(calculate(data))
+        })
+
+      const weightInput = createInputWeight((e) => {
+          data.weight = +e.currentTarget.value
+          updateData(calculate(data))
+        })
+
+      root.append(heightInput)
+      root.append(weightInput)
+      parent.append(root)
+      parent.append(document.createElement('hr'))
+    }
+
+  const root = document.getElementById('root')
+  const button = document.getElementById('create')
+  const result = {}
+
+  function showResult() {
+      const commonResult = Object.entries(result).reduce((res, [key, value]) => {
+          res = res + value
+          return res
+        }, 0)
+      const resultBlock = document.getElementById('result')
+      resultBlock.innerText = commonResult
+    }
+
+  button.addEventListener('click', () => {
+      const formName = `form-${Object.keys(result).length}`
+      result[formName] = 0
+
+      createForm((data) => {
+          console.log(data)
+          result[formName] = data
+          showResult()
+        }, root)
+    })
+</script>
+

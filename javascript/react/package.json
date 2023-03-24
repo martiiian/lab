@@ -1,0 +1,13 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "babel --watch src --out-dir ./dist/ --presets react-app/prod"
+  },
+  "devDependencies": {
+    "babel-cli": "6",
+    "babel-preset-react-app": "3"
+  }
+}
