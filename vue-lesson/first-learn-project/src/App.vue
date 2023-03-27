@@ -12,6 +12,9 @@
 
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import bibaFunction from 'biba-package'
+
+bibaFunction()
 </script>
 
 <style scoped>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Basic JavaScript module example</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "shapes": "./shapes/square.js",
+      "shapes/square": "./modules/shapes/square.js",
+      "https://example.com/shapes/": "/shapes/square/",
+      "https://example.com/shapes/square.js": "./shapes/square.js",
+      "../shapes/square": "./shapes/square.js"
+    }
+  }
+</script>
+  <script type="module" src="main.js"></script>
+  <button id="biba-button">Click to see biba in console</button>
+</head>
+<body>
+
+</body>
+</html>
