@@ -2,15 +2,18 @@
   "name": "first-learn-project",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server:start": "node server.js"
   },
   "dependencies": {
+    "@ru-settlements/ui-components": "^0.1.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
     "vue": "^3.2.45",
-    "biba-package": "^1.0.0"
+    "vue-query": "^1.26.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

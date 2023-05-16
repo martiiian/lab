@@ -2,6 +2,6 @@
 # yarn lockfile v1
 
 
-"biba-package@file:../martiiian/biba-package":
+"ui-components@file:../settlements/ui-components":
   version "1.0.0"
-  resolved "file:../martiiian/biba-package"
+  resolved "file:../settlements/ui-components"
