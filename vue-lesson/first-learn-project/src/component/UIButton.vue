@@ -1,6 +1,8 @@
 <template>
   <button>
-    <slot />
+    <slot>
+      default button, loading...
+    </slot>
   </button>
 </template>
 

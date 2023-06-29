@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:martiiian/lab.git",
   "author": "martiiian <jkramorevx@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@vueuse/core": "^10.1.2"
+  }
 }

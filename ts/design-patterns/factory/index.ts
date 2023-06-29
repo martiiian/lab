@@ -3,14 +3,14 @@ interface IProduct {
   description: string
 }
 
-class Product implement IProduct {
+class Product implements IProduct {
   name: ''
   description: ''
 }
 
 
 class Factory {
-  static createProduct({ name, description }): Product {
-    return new Product(name, description)
+  static createProduct({ name, description }: { name: string, description: string }): Product {
+    return new Product()
   }
 }
